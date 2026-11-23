@@ -1,6 +1,6 @@
 <div align="center">
 
-# 💧 Monitor de Agua
+# 💧 Sistema de Monitoreo de Calidad del Agua
 
 </div>
 
@@ -28,7 +28,7 @@
 
 ## 1. Descripción del Proyecto y Problema que Resuelve
 
-**Monitor de Agua** es una aplicación **modular de consola** desarrollada en **Python puro**, usando **únicamente la biblioteca estándar**. No utiliza sensores físicos, bases de datos ni interfaces gráficas; los datos se capturan manualmente por consola y se mantienen en memoria durante la ejecución.
+**monitor-agua** es una aplicación **modular de consola** desarrollada en **Python puro**, usando **únicamente la biblioteca estándar**. No utiliza sensores físicos, bases de datos ni interfaces gráficas, los datos se capturan manualmente por consola y se mantienen en memoria durante la ejecución.
 
 **El Problema:** Los cuerpos de agua como lagos, lagunas y jagüeyes requieren un monitoreo periódico de sus parámetros fisicoquímicos (pH, temperatura, oxígeno disuelto y turbidez) para detectar a tiempo alteraciones ambientales. Sin una validación sistemática, los valores anómalos pasan inadvertidos o se registran datos inconsistentes.
 
@@ -38,7 +38,7 @@
 
 ### 2.1 Encapsulamiento y Niveles de Acceso
 
-Python no impone modificadores de acceso estrictos; se aplican por **convención** (`_`) y por **name mangling** (`__`).
+Python no impone modificadores de acceso estrictos, se aplican por **convención** (`_`) y por **name mangling** (`__`).
 
 | Clase | Atributo | Nivel | Acceso |
 |:--|:--|:--|:--|
@@ -55,10 +55,10 @@ Python no impone modificadores de acceso estrictos; se aplican por **convención
 
 ```python
 try:
-    print(self.__tipo)            # se interpreta como self._Laguna__tipo
+    print(self.__tipo)            # Se interpreta como self._Laguna__tipo
 except AttributeError as e:
     print(f"AttributeError: {e}")
-print(self.get_tipo())            # acceso correcto mediante getter
+print(self.get_tipo())            # Acceso correcto mediante getter
 ```
 
 ### 2.2 Herencia Simple y Sobrescritura
@@ -86,7 +86,7 @@ class SistemaEvaluacion(EvaluadorFisico, EvaluadorQuimico):
 SistemaEvaluacion -> EvaluadorFisico -> EvaluadorQuimico -> object
 ```
 
-Como `EvaluadorFisico` aparece primero, `super().obtener_criterio_base()` resuelve y ejecuta **su versión** (`"Criterio Físico: ..."`); la de `EvaluadorQuimico` queda oculta y solo se alcanza con una llamada explícita (`EvaluadorQuimico.obtener_criterio_base(self)`). Ambas se muestran en la opción 6 del menú.
+Como `EvaluadorFisico` aparece primero, `super().obtener_criterio_base()` resuelve y ejecuta **su versión** (`"Criterio Físico: ..."`), la de `EvaluadorQuimico` queda oculta y solo se alcanza con una llamada explícita (`EvaluadorQuimico.obtener_criterio_base(self)`). Ambas se muestran en la opción 6 del menú.
 
 Además, `evaluar_calidad(medicion)` invoca los cuatro métodos heredados (`evaluar_temperatura`, `evaluar_turbidez`, `evaluar_ph`, `evaluar_oxigeno`) y emite el dictamen general: **ACEPTABLE** o **REQUIERE ATENCIÓN**.
 
